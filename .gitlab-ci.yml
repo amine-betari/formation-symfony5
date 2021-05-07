@@ -7,3 +7,12 @@ cache:
   paths:
     - project/vendor/
     - project/node_modules
+
+stages:
+  - SecurityChecker
+
+security-checker:
+  stage: SecurityChecker
+  script:
+    - local-php-security-checker  --path=./project/composer.lock
+  allow_failure: false
