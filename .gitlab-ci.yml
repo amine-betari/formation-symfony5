@@ -1,3 +1,2 @@
 include:
-  - project: 'project'
-    file: '/project/.gitlab-ci.yml'
+  - template: 'project/.gitlab-ci.yml'
