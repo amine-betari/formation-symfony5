@@ -10,9 +10,28 @@ cache:
 
 stages:
   - SecurityChecker
+  - CodingStandards
 
 security-checker:
   stage: SecurityChecker
   script:
     - local-php-security-checker  --path=./project/composer.lock
+  allow_failure: false
+
+phpcs:
+  stage: CodingStandards
+  script:
+    - phpcs -v --standard=PSR12 --ignore=./project/src/Kernel.php ./project/src
+  allow_failure: false
+
+phpstan:
+  stage: CodingStandards
+  script:
+    - phpstan analyse ./project/src
+  allow_failure: false
+
+twig-lint:
+  stage: CodingStandards
+  script:
+    - twig-lint lint ./project/templates
   allow_failure: false
