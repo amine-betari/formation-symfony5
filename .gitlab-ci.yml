@@ -1,2 +1,9 @@
-include:
-  - template: 'project/.gitlab-ci.yml'
+image: jakzal/phpqa:php7.4
+
+before_script:
+  - composer install -d project/
+
+cache:
+  paths:
+    - project/vendor/
+    - project/node_modules
