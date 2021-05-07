@@ -1,2 +1,2 @@
 imports:
-  - { resource: project/.gitalb-ci.yml }
+    - { resource: project/.gitalb-ci.yml }
