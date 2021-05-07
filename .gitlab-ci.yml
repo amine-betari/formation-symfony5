@@ -1,0 +1,2 @@
+imports:
+  - { resource: project/.gitalb-ci.yml }
