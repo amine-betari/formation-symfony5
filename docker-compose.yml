@@ -41,6 +41,14 @@ services:
           - 6379:6379
         networks:
           - dev
+    rabbitmq:
+        image: rabbitmq:3.7-management
+        container_name: rabbitmq_symfony
+        ports:
+          - 5672:5672
+          - 15672:15672
+        networks:
+          - dev
     www:
       build: php
       container_name: www_symfony
