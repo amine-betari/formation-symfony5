@@ -59,5 +59,6 @@ phpunit:
     - php bin/console doctrine:database:create --env=test
     - php bin/console doctrine:migration:migrate --env=test -n
   script:
+    - npm run build
     - php bin/phpunit tests/
   allow_failure: false
