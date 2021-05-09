@@ -51,8 +51,7 @@ phpunit:
     DATABASE_URL: 'mysql://myapptest:myapptest@mysql:3306/myapptest'
   before_script:
     - cd project
-    - apt-get install -y --no-install-recommends \
-      locales apt-utils git libicu-dev g++ libpng-dev libxml2-dev libzip-dev libonig-dev librabbitmq-dev libxslt-dev unzip
+    - apt-get update && apt-get install -y git libzip-dev librabbitmq-dev
     - curl -sSk https://getcomposer.org/installer | php -- --disable-tls && mv composer.phar /usr/local/bin/composer
     - docker-php-ext-install mysqli pdo pdo_mysql zip
     - pecl install amqp && docker-php-ext-enable
