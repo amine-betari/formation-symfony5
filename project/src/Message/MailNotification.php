@@ -29,5 +29,4 @@ class MailNotification
     {
         return $this->from;
     }
-    
 }

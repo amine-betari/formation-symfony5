@@ -25,8 +25,6 @@ class MailNotificationHandler implements MessageHandlerInterface
             ->html('<p>' . $message->getDescription() . '</p>');
 
         sleep(10);
-
         $this->mailer->send($email);
     }
-
 }

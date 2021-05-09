@@ -48,7 +48,9 @@ class HomeController extends AbstractController
             $mailer->send($email);
           */
 
-            $this->dispatchMessage(new MailNotification($task->getDescription(), $task->getId(), $task->getUser()->getEmail()));
+            $this->dispatchMessage(
+                new MailNotification($task->getDescription(), $task->getId(), $task->getUser()->getEmail())
+            );
 
             // Test Mailer
             return $this->redirectToRoute('home');
