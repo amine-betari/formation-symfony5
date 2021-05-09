@@ -22,6 +22,6 @@ RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf \
             pdo pdo_mysql opcache intl zip calendar dom mbstring gd xsl \
 \
     &&  pecl install apcu && docker-php-ext-enable apcu \
-    &&  pecl install amqamqpp && docker-php-ext-enable
+    &&  pecl install amqp && docker-php-ext-enable amqp
 
 WORKDIR /var/www/
