@@ -28,4 +28,5 @@ class MailNotificationHandler implements MessageHandlerInterface
 
         $this->mailer->send($email);
     }
+
 }

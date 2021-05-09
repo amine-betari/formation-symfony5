@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Message;
 
 class MailNotification
@@ -30,4 +29,5 @@ class MailNotification
     {
         return $this->from;
     }
+    
 }
