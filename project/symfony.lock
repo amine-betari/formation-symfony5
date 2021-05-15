@@ -1,4 +1,7 @@
 {
+    "abraham/twitteroauth": {
+        "version": "2.0.1"
+    },
     "api-platform/api-pack": {
         "version": "v1.3.0"
     },
@@ -15,6 +18,9 @@
             "config/routes/api_platform.yaml",
             "src/Entity/.gitignore"
         ]
+    },
+    "composer/ca-bundle": {
+        "version": "1.2.9"
     },
     "composer/package-versions-deprecated": {
         "version": "1.11.99.1"
