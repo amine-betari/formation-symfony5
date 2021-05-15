@@ -8,10 +8,12 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
+ * @ApiResource
  */
 class User implements UserInterface
 {
@@ -43,9 +45,15 @@ class User implements UserInterface
      */
     private $incidents;
 
+    /**
+     * @ORM\OneToMany(targetEntity=ToyRequest::class, mappedBy="user")
+     */
+    private $toyRequests;
+
     public function __construct()
     {
         $this->incidents = new ArrayCollection();
+        $this->toyRequests = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -153,6 +161,36 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($incident->getUser() === $this) {
                 $incident->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ToyRequest[]
+     */
+    public function getToyRequests(): Collection
+    {
+        return $this->toyRequests;
+    }
+
+    public function addToyRequest(ToyRequest $toyRequest): self
+    {
+        if (!$this->toyRequests->contains($toyRequest)) {
+            $this->toyRequests[] = $toyRequest;
+            $toyRequest->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeToyRequest(ToyRequest $toyRequest): self
+    {
+        if ($this->toyRequests->removeElement($toyRequest)) {
+            // set the owning side to null (unless already changed)
+            if ($toyRequest->getUser() === $this) {
+                $toyRequest->setUser(null);
             }
         }
 

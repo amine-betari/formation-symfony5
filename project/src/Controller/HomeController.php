@@ -61,4 +61,13 @@ class HomeController extends AbstractController
             'controller_name' => 'HomeController',
         ]);
     }
+
+    /**
+     * @Route("/toys", name="toys")
+     */
+    public function toys(Request $request, EntityManagerInterface $em): Response
+    {
+        return $this->render('home/toys.html.twig', [
+        ]);
+    }
 }

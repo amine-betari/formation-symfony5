@@ -4,9 +4,11 @@ namespace App\Entity;
 
 use App\Repository\IncidentRepository;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
  * @ORM\Entity(repositoryClass=IncidentRepository::class)
+ * @ApiResource
  */
 class Incident
 {

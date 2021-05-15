@@ -10,10 +10,39 @@ security:
             entity:
                 class: App\Entity\User
                 property: email
+
+    role_hierarchy:
+        ROLE_DAD: [ ROLE_PARENT ]
+        ROLE_MUM: [ ROLE_PARENT ]
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+
+        registration:
+            pattern: ^/api/users
+            anonymous: true
+            stateless: true
+            methods: [ POST ]
+
+        login:
+            pattern: ^/api/login
+            stateless: true
+            anonymous: true
+            json_login:
+                check_path: /api/login_check
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+
+        api:
+            pattern: ^/api
+            anonymous: true
+            stateless: true
+            guard:
+                authenticators:
+                    - lexik_jwt_authentication.jwt_token_authenticator
+
         main:
             anonymous: true
             lazy: true
@@ -36,5 +65,11 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/home, roles: ROLE_USER }
+        - { path: ^/toy/new, roles: ROLE_KID}
+        - { path: ^/toy/parent, roles: ROLE_PARENT}
+        - { path: ^/toy/change, roles: ROLE_PARENT}
+        - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/users, roles: IS_AUTHENTICATED_FULLY, methods: [ GET, PUT, DELETE, PATCH ] }
+        - { path: ^/api/demo, roles: IS_AUTHENTICATED_FULLY }-
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
