@@ -13,6 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use DateTime;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
+use App\Service\GetData;
 
 class HomeController extends AbstractController
 {
@@ -65,9 +66,23 @@ class HomeController extends AbstractController
     /**
      * @Route("/toys", name="toys")
      */
-    public function toys(Request $request, EntityManagerInterface $em): Response
+    public function toys(Request $request): Response
     {
         return $this->render('home/toys.html.twig', [
         ]);
     }
+
+    /**
+     * @Route("/covid", name="covid")
+     */
+    public function covid(Request $request, GetData $callApiService): Response
+    {
+        // dd($callApiService->getFranceData());
+        // dd($callApiService->getAllData());
+        return $this->render('home/covid.html.twig', [
+            'data' => $callApiService->getFranceData(),
+            'departments' => $callApiService->getAllData(),
+        ]);
+    }
+
 }
